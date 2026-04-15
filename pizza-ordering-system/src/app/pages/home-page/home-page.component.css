@@ -1,0 +1,56 @@
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+p {
+  color: #475569;
+}
+
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size-button {
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.size-button.active {
+  border-color: #ea580c;
+  background: #fff7ed;
+}
+
+.primary-link {
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #ea580c;
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .size-grid {
+    grid-template-columns: 1fr;
+  }
+}

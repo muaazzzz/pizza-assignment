@@ -1,0 +1,36 @@
+<section class="card">
+  <h2>Toppings Selection</h2>
+  <p>
+    Selected size: <strong>{{ selectedSizeName }}</strong>
+  </p>
+
+  <div class="topping-grid">
+    @for (topping of toppings; track topping.name) {
+      <label class="topping-item">
+        <input
+          type="checkbox"
+          [checked]="isToppingSelected(topping.name)"
+          (change)="toggleTopping(topping.name, $any($event.target).checked)"
+        />
+        <span class="topping-name">{{ topping.name }}</span>
+        <span class="topping-type">{{ topping.category }}</span>
+        <span class="topping-price">${{ topping.price.toFixed(2) }}</span>
+      </label>
+    }
+  </div>
+
+  <div class="preview-box">
+    <p><strong>Current Pizza Preview</strong></p>
+    <p>Size: {{ previewPizza.size.name }}</p>
+    <p>Toppings: {{ previewPizza.selectedToppings.length }}</p>
+    <p>Subtotal: ${{ previewPizza.subtotal.toFixed(2) }}</p>
+  </div>
+
+  <div class="actions">
+    <a class="secondary-link" routerLink="/">Back To Home</a>
+    <button type="button" class="primary-button" (click)="addCurrentPizzaToCart()">
+      Add Pizza To Cart
+    </button>
+    <a class="secondary-link" routerLink="/cart">Go To Cart</a>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+<section class="layout">
+  <div class="card">
+    <h2>Cart</h2>
+
+    @if (cartPizzas.length === 0) {
+      <p class="empty-note">Your cart is empty. Add pizzas from the toppings page.</p>
+    } @else {
+      <ul class="cart-list">
+        @for (pizza of cartPizzas; track pizza.id) {
+          <li class="cart-item">
+            <div>
+              <strong>Pizza #{{ pizza.id }} - {{ pizza.size.name }}</strong>
+              <p>{{ pizza.selectedToppings.length }} toppings</p>
+              <p>${{ pizza.subtotal.toFixed(2) }}</p>
+            </div>
+            <button type="button" class="remove-button" (click)="removePizzaFromCart(pizza.id)">
+              Remove
+            </button>
+          </li>
+        }
+      </ul>
+
+      <hr />
+
+      <p class="line-item">
+        <span>Subtotal</span>
+        <strong>${{ orderSubtotal.toFixed(2) }}</strong>
+      </p>
+
+      <p class="line-item discount" [class.applied]="orderDiscount > 0">
+        <span>Total Offer Discount</span>
+        <strong>- ${{ orderDiscount.toFixed(2) }}</strong>
+      </p>
+
+      @if (appliedOffers.length > 0) {
+        <div class="offer-note">
+          <strong>Applied Offers</strong>
+          <ul class="applied-offer-list">
+            @for (appliedOffer of appliedOffers; track appliedOffer.offerCode) {
+              <li>
+                {{ appliedOffer.offerCode }} x{{ appliedOffer.timesApplied }} (saved ${{
+                  appliedOffer.discountAmount.toFixed(2)
+                }})
+              </li>
+            }
+          </ul>
+        </div>
+      }
+
+      <p class="line-item total">
+        <span>Total</span>
+        <strong>${{ orderTotal.toFixed(2) }}</strong>
+      </p>
+
+      <div class="actions">
+        <a class="secondary-link" routerLink="/toppings">Add More Pizzas</a>
+        <button type="button" class="remove-button" (click)="clearCart()">Clear Cart</button>
+      </div>
+    }
+  </div>
+
+  <aside class="card">
+    <h2>Offers</h2>
+    <div class="offers-list">
+      @for (offer of offers; track offer.offerCode) {
+        <div class="offer-card">
+          <h3>{{ offer.offerCode }} - {{ offer.title }}</h3>
+          <p>{{ offer.description }}</p>
+        </div>
+      }
+    </div>
+  </aside>
+</section>

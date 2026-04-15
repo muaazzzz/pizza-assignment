@@ -1,0 +1,91 @@
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.topping-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 10px;
+}
+
+.topping-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.topping-name {
+  font-weight: 600;
+}
+
+.topping-type {
+  grid-column: 2;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.topping-price {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  font-weight: 700;
+}
+
+.preview-box {
+  margin-top: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.preview-box p {
+  margin: 6px 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.primary-button,
+.secondary-link {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.primary-button {
+  border-color: #ea580c;
+  background: #ea580c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.secondary-link {
+  color: #334155;
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .topping-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,125 +1,16 @@
-<main class="page">
-  <section class="builder card">
+<main class="shell">
+  <header class="topbar">
     <h1>Simple Pizza Ordering System</h1>
-    <p class="subtitle">Build one pizza, add it to cart, and repeat for any size.</p>
+    <nav class="nav-links">
+      <a routerLink="/" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a routerLink="/toppings" routerLinkActive="active">Toppings</a>
+      <a routerLink="/cart" routerLinkActive="active">Cart</a>
+    </nav>
+  </header>
 
-    <h2>Pizza Size</h2>
-    <div class="size-grid">
-      @for (size of sizes; track size.name) {
-        <button
-          type="button"
-          class="size-button"
-          [class.active]="selectedSizeName === size.name"
-          (click)="setSize(size.name)"
-        >
-          <span>{{ size.name }}</span>
-          <strong>${{ size.price.toFixed(2) }}</strong>
-        </button>
-      }
-    </div>
-
-    <h2>Toppings</h2>
-    <p class="helper">Pick toppings for the current pizza you are building.</p>
-    <div class="topping-grid">
-      @for (topping of toppings; track topping.name) {
-        <label class="topping-item">
-          <input
-            type="checkbox"
-            [checked]="isToppingSelected(topping.name)"
-            (change)="toggleTopping(topping.name, $any($event.target).checked)"
-          />
-          <span class="topping-name">{{ topping.name }}</span>
-          <span class="topping-type">{{ topping.category }}</span>
-          <span class="topping-price">${{ topping.price.toFixed(2) }}</span>
-        </label>
-      }
-    </div>
-
-    <h2>Current Pizza Preview</h2>
-    <div class="preview-box">
-      <p class="line-item">
-        <span>Size</span>
-        <strong>{{ previewPizza.size.name }} (${{ previewPizza.size.price.toFixed(2) }})</strong>
-      </p>
-      <p class="line-item">
-        <span>Toppings</span>
-        <strong>{{ previewPizza.selectedToppings.length }}</strong>
-      </p>
-      <p class="line-item">
-        <span>Pizza Subtotal</span>
-        <strong>${{ previewPizza.subtotal.toFixed(2) }}</strong>
-      </p>
-    </div>
-
-    <button type="button" class="primary-button" (click)="addCurrentPizzaToCart()">
-      Add Pizza To Cart
-    </button>
-
-    <h2>Available Offers</h2>
-    <div class="offers-list">
-      @for (offer of offers; track offer.offerCode) {
-        <div class="offer-card">
-          <h3>{{ offer.offerCode }} - {{ offer.title }}</h3>
-          <p>{{ offer.description }}</p>
-        </div>
-      }
-    </div>
+  <section class="page-body">
+    <router-outlet />
   </section>
-
-  <aside class="summary card">
-    <h2>Order Summary</h2>
-
-    @if (cartPizzas.length === 0) {
-      <p class="empty-note">Your cart is empty. Add pizzas from the left panel.</p>
-    } @else {
-      <ul class="cart-list">
-        @for (pizza of cartPizzas; track pizza.id) {
-          <li class="cart-item">
-            <div>
-              <strong>Pizza #{{ pizza.id }} - {{ pizza.size.name }}</strong>
-              <p>{{ pizza.selectedToppings.length }} toppings</p>
-              <p>${{ pizza.subtotal.toFixed(2) }}</p>
-            </div>
-            <button type="button" class="remove-button" (click)="removePizzaFromCart(pizza.id)">
-              Remove
-            </button>
-          </li>
-        }
-      </ul>
-
-      <hr />
-
-      <p class="line-item">
-        <span>Subtotal</span>
-        <strong>${{ orderSubtotal.toFixed(2) }}</strong>
-      </p>
-
-      <p class="line-item discount" [class.applied]="orderDiscount > 0">
-        <span>Total Offer Discount</span>
-        <strong>- ${{ orderDiscount.toFixed(2) }}</strong>
-      </p>
-
-      @if (appliedOffers.length > 0) {
-        <div class="offer-note">
-          <strong>Applied Offers</strong>
-          <ul class="applied-offer-list">
-            @for (appliedOffer of appliedOffers; track appliedOffer.offerCode) {
-              <li>
-                {{ appliedOffer.offerCode }} x{{ appliedOffer.timesApplied }} (saved ${{
-                  appliedOffer.discountAmount.toFixed(2)
-                }})
-              </li>
-            }
-          </ul>
-        </div>
-      }
-
-      <p class="line-item total">
-        <span>Total</span>
-        <strong>${{ orderTotal.toFixed(2) }}</strong>
-      </p>
-
-      <button type="button" class="secondary-button" (click)="clearCart()">Clear Cart</button>
-    }
-  </aside>
 </main>

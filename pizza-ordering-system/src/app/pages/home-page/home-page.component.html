@@ -1,0 +1,20 @@
+<section class="card">
+  <h2>Home</h2>
+  <p>Select a pizza size to begin your order.</p>
+
+  <div class="size-grid">
+    @for (size of sizes; track size.name) {
+      <button
+        type="button"
+        class="size-button"
+        [class.active]="selectedSizeName === size.name"
+        (click)="setSize(size.name)"
+      >
+        <span>{{ size.name }}</span>
+        <strong>${{ size.price.toFixed(2) }}</strong>
+      </button>
+    }
+  </div>
+
+  <a class="primary-link" routerLink="/toppings">Continue To Toppings</a>
+</section>
